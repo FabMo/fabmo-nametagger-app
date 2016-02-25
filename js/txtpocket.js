@@ -493,16 +493,16 @@ ctx.beginPath()
 ctx.lineWidth="1"
 ctx.strokeStyle="black"
 
-var hpos = 1.75
+var vpos = 2
 
 console.log(ymin)
 
 //ctx.moveTo(0,0);
 //ctx.lineTo(10,10);
 for(i=0;i<text.length;i++){
-   ctx.moveTo(((svgw)/2)-(xmax/sf/2)-(xmin/sf/2)+text[i][0][0]/sf,text[i][0][1]/sf+(svgh/hpos)-(ymax/sf)+(ymax/sf/2-ymin/sf/2))
+   ctx.moveTo(((svgw)/2)-(xmax/sf/2)-(xmin/sf/2)+text[i][0][0]/sf,text[i][0][1]/sf+(svgh/vpos)-(ymax/sf)+(ymax/sf/2-ymin/sf/2))
    for(j=0;j<text[i].length;j++){
-      ctx.lineTo(((svgw)/2)-(xmax/sf/2)-(xmin/sf/2)+text[i][j][0]/sf,text[i][j][1]/sf+(svgh/hpos)-(ymax/sf)+(ymax/sf/2-ymin/sf/2))
+      ctx.lineTo(((svgw)/2)-(xmax/sf/2)-(xmin/sf/2)+text[i][j][0]/sf,text[i][j][1]/sf+(svgh/vpos)-(ymax/sf)+(ymax/sf/2-ymin/sf/2))
    }  
 }
 
