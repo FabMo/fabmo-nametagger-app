@@ -1,0 +1,10 @@
+{
+  "name": "Name Tagger",
+  "main": "./index.html",
+  "icon": "icon.png",
+  "icon_color": "white",
+  "version": "0.0.1",
+  "author": "Jonathan Ward and Bill Young",
+  "website": "http://www.shopbottools.com",
+  "description": "A simple name tag app"
+}
