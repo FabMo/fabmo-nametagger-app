@@ -556,13 +556,16 @@ for(i=0;i<pocket.length;i++){
 g+='g0z0.2\n'
 } 
 
-//I want to add the contents of the file "cutouts/bat.g" 
-// to the string "g""
-// but none of the solutions I've found online work
+
 
 g+='m5\n'
 g+='g0x0y0\n'
-g+='m30\n'
+
+// append the bat.g file to the pocketing string
+jQuery.get('cutouts/bat.g', function(data){
+g+= data
+});
+
 
 //console.log(g)
 
