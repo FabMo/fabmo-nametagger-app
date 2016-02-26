@@ -113,13 +113,19 @@ canvas{
 	}
 }
 label{
-	display: block;
+	/*display: block;*/
     padding-bottom: 1px;
     font-weight: bold;
 }
 input{
-	margin: 5px 1em 20px 1em;
+	margin: .5em 0em 1.5em 1.5em;
     font-size: 1em;
+	width: 100px;
+}
+select{
+	margin: .5em 0em 1.5em 1.5em;
+    font-size: 1em;
+	width: 150px;
 }
 #submit {
 	width: 33%;

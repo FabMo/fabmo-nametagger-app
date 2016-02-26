@@ -22,6 +22,7 @@ var oset = [[0,1]]
 var dots = []
 var tool_diameter
 var cut_depth
+var engrave_depth
 var pocket = []
 var pockets = []
 var pocket_o = []
@@ -84,7 +85,8 @@ function txtpocket(txt_string, font, size, tool){
     console.log(font)
 
 var source = new Image();
-source.src = 'cutouts/bat.svg';
+source.src = $('#cutoutShape').val();
+
 
 // Render our SVG image to the canvas once it loads.
 source.onload = function(){
@@ -109,7 +111,8 @@ setTimeout('drawText()', 400);
    sf = parseFloat((152.4/(size*25.4)).toFixed(2))
 //   console.log(sf)
    tool_diameter = tool*sf
-   cut_depth = 0.015 
+   //engrave_depth = 0.015 
+   engrave_depth = $('#engraveDepth').val();
    //make pockets
    loadtxt()
 
@@ -539,7 +542,7 @@ for(i=0;i<pocket.length;i++){
 
          if(j2==0){
             g+='g0x' + ((-(xmax-xmin)/25.4/sf)/2+((pocket[i][j][j2].X/100)/25.4/sf)).toFixed(3) + "y" + (((ymax+ymin)/25.4/sf/2)-(((pocket[i][j][j2].Y/100)/25.4/sf)).toFixed(3)) + '\n'
-         g+='g1z-' + (cut_depth) + 'f20\n'
+         g+='g1z-' + (engrave_depth) + 'f20\n'
          }
          else{
             g+='g1x' + ((-(xmax-xmin)/25.4/sf/2)+((pocket[i][j][j2].X/100)/25.4/sf)).toFixed(3) + "y" + (((ymax+ymin)/25.4/sf/2)-(((pocket[i][j][j2].Y/100)/25.4/sf)).toFixed(3)) + 'f30\n'

@@ -27,7 +27,7 @@
       <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-2-3 image-container">
 				 <!-- <div class="worksheet"> -->
   				<!-- <div id="canvas-holder"> -->
-    				<canvas id="worksheet-canvas" height="600" width="600" style="width: 935px; height: 935px;">
+    				<canvas id="worksheet-canvas"  height="600" width="600" style="width: 935px; height: 935px;">
                           
                     </canvas>
           <!-- </div> -->
@@ -43,20 +43,58 @@
                   <div class="basic">
                      <div class="pure-control-group">
  
-        			<label for="font">FONT</label>
+        			<label for="font">Select your Font:</label>
                         <select name="font" id="fontlist">
-                        <option value="ChicagoFLF.ttf">Chicago</option>
-                        <option value="junegull.ttf">Junegull</option>          
-                        <option value="newmars.ttf" selected>New Mars</option>
-                        <option value="Roboto-Black.ttf">Roboto</option>
-                        <option value="square-deal.ttf">SquareDeal</option>
-                        <option value="Ubuntu-Title.ttf">Ubuntu</option>
+                        <option value="cherry-swash-v4-latin-regular.ttf" selected>Cherry Swash</option>
+                        <option value="kadwa-v1-latin-regular.ttf" >Kadwa</option>    
+                        <option value="lato-v11-latin-regular.ttf" >Lato</option>      
+                        <option value="leckerli-one-v7-latin-regular.ttf">Leckerli One</option>
+                        <option value="lora-v9-latin-regular.ttf" >Lora</option>
+                        <option value="oleo-script-v5-latin-regular.ttf">Oleo</option>
+                        <option value="open-sans-v13-latin-regular.ttf">Open Sans</option>						
+                        <option value="overlock-v5-latin-regular.ttf">Overlook</option>							
+                        <option value="raleway-v10-latin-regular.ttf" >Raleway</option>   
+                        <option value="roboto-v15-latin-regular.ttf" >Roboto</option>       					
+                        <option value="tillana-v1-latin-regular.ttf">Tillana</option>						
+                        <option value="ubuntu-v9-latin-regular.ttf">Ubuntu</option>
                         </select>
                     </div>
                     <div class="pure-control-group">
-                    <label for="text">Enter your initials, up to 3 letters</label>    
-                   <input type="text" id="ToEngrave" maxlength="3">
+                    <label for="text">Enter 3 letters or characters:</label>    
+                   <input type="text" id="ToEngrave" maxlength="3" value="ABC">
                     </div>
+                    
+                     <div class="pure-control-group">
+                    <label for="letterHeight">Letter Height:</label>    
+                   <input type="text" id="letterHeight" maxlength="3" value="1.0" >
+                    </div>                  
+                     <div class="pure-control-group">
+                     <label for="shape">Nametag Shape:</label>
+                        <select class="preset" name="shape" id="cutoutShape" >
+                        <option value="cutouts/bat.svg" selected>Bat</option>
+                        <option value="cutouts/2 inch box.svg" >2 inch Box</option>          
+                        </select>
+                    </div>    
+ 
+        			<label for="bit">Bit Diameter:</label>
+                        <select class="preset" name="bit" id="bitSize" >
+                        <option value="0.03125" selected>1/32"</option>
+                        <option value="0.05" >0.05"</option>          
+                        <option value="0.0625">1/16"</option>
+                        </select>
+                    </div>
+                    
+                     <div class="pure-control-group">
+                    <label for="cutDepth">Cutout Depth:</label>    
+                   <input class="preset"type="text" id="cutDepth" maxlength="3" value="0.07" >
+                    </div>
+                    
+                     <div class="pure-control-group">
+                    <label for="engraveDepth">Engraving Depth:</label>    
+                   <input type="text" id="engraveDepth" maxlength="3" value="0.02" >
+                    </div>
+
+                    
                    	 <div class="pure-control-group">
                     <div style="margin-top: 10px;">
                       <button id="draw" type="button">Draw Text</button><p>
@@ -85,18 +123,35 @@
 
 >
 <script>
+$('#fontlist').on('change', function(){
+     draw ();
+});
+
+$('#ToEngrave').on('change', function(){
+     draw ();
+});
+
+$('#draw').on('click', function(){
+    draw()
+    
+});
 
 
- $('#draw').on('click', function (){
+function draw (){
    thisString = $('#ToEngrave').val();
    if(thisString==''){
       thisString='BAT'
    }
-   console.log(thisString)
+
    var fontSelected = "fonts/" + $('#fontlist').val();
-   console.log(fontSelected)
-	txtpocket(thisString,fontSelected,1.5,0.0625)
- });
+   var letterHt = $('#letterHeight').val();
+   var bit =  $('#bitSize').val();
+   //console.log(thisString + ", "+ fontSelected+ ", " + letterHt + ", " + bit)
+	txtpocket(thisString,fontSelected,letterHt,bit)
+ 
+ };
+ 
+ 
 </script>
   
 
