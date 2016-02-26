@@ -554,9 +554,12 @@ for(i=0;i<pocket.length;i++){
 
       }
 g+='g0z0.2\n'
-}
-var gcodesaved = "cutouts/bat.g";
-console.log(gcodesaved);
+} 
+
+//I want to add the contents of the file "cutouts/bat.g" 
+// to the string "g""
+// but none of the solutions I've found online work
+
 g+='m5\n'
 g+='g0x0y0\n'
 g+='m30\n'
@@ -564,12 +567,14 @@ g+='m30\n'
 //console.log(g)
 
 
-//fabmo.submitJob({
-//   file : g,
-//   filename : txt + '.g',
-//   name : "TEXT: " + txt,
-//   description : "txtpocket"
-//});
+fabmo.submitJob({
+   file : g,
+   filename : txt + '.g',
+   name : "TEXT: " + txt,
+   description : "txtpocket"
+});
+
+
 
 }
 
