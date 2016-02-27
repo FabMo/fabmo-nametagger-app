@@ -551,7 +551,8 @@ ctx.strokeStyle="black"
 
 var vpos = 2
 
-console.log(text)
+//console.log(svgw)
+//console.log(text)
 
 //ctx.moveTo(0,0);
 //ctx.lineTo(10,10);
