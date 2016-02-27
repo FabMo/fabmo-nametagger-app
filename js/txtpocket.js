@@ -46,6 +46,9 @@ var worksheetCanvas
 var ctx
 var svgw
 var svgh
+var tool
+var targeth
+var sf2
 
 
 
@@ -71,6 +74,8 @@ function reload(){
    pocket_o = []
    g = ""
    count = []
+   x=[]
+   y=[]
 
 
 }
@@ -107,12 +112,13 @@ setTimeout('drawText()', 400);
 //   console.log(txt)
    fontFileName = font
    txt_size = size
-    console.log("size = " + size)  
+   console.log("size = " + size)
+   targeth = size  
 
    //set scale factor
    sf = parseFloat((152.4/(size*25.4)).toFixed(2))
+   tool_diameter = tool
 
-   tool_diameter = tool*sf
    console.log("tool = " + tool)   
    //engrave_depth = 0.015 
    engrave_depth = $('#engraveDepth').val();
@@ -234,15 +240,6 @@ test2 = ""
 }
 
 
-var minx = []
-var miny = []
-var low = []
-
-xy = []
-x = []
-y = []
-
-
 for(i=0;i<dots.length;i++){
 
 points.push([]);
@@ -272,6 +269,59 @@ else{
    ymax = (Math.max.apply(Math, y))
 }
 
+//console.log(points)
+//console.log(dots)
+var sf2 = (targeth/(Math.abs(ymin/25.4/sf)))
+//console.log(targeth/(Math.abs(ymin/25.4/sf)))
+x=[]
+y=[]
+
+
+for(i=0;i<dots.length;i++){
+
+   for(j=0;j<dots[i].length;j++){
+      dots[i][j][0] = dots[i][j][0]*sf2
+      dots[i][j][1] = dots[i][j][1]*sf2
+      x.push(dots[i][j][0])
+      y.push(dots[i][j][1])         
+   }
+
+}
+
+if(dots.length<1){
+
+   xmin = 0
+   xmax = 0
+   ymin = 0
+   ymax = 0
+}
+else{
+   xmin = (Math.min.apply(Math, x))
+   xmax = (Math.max.apply(Math, x))
+   ymin = (Math.min.apply(Math, y))
+   ymax = (Math.max.apply(Math, y))
+}
+
+
+for(i=0;i<points.length;i++){
+
+   for(j=0;j<points[i].length;j++){
+      points[i][j].X = points[i][j].X*sf2
+      points[i][j].Y = points[i][j].Y*sf2
+  
+   }
+
+}
+
+
+
+
+
+//size
+//console.log(Math.abs(ymin/25.4/sf))
+//sf = parseFloat((152.4/(size*25.4)).toFixed(2))
+tool_diameter = tool_diameter*sf
+//console.log(tool_diameter)
 
 ClipperLib.JS.ScaleUpPaths(points, scale)
 
@@ -501,14 +551,14 @@ ctx.strokeStyle="black"
 
 var vpos = 2
 
-//console.log(ymin)
+console.log(text)
 
 //ctx.moveTo(0,0);
 //ctx.lineTo(10,10);
 for(i=0;i<text.length;i++){
-   ctx.moveTo(((svgw)/2)-(xmax/sf/2*2.83)-(xmin/sf/2*2.83)+text[i][0][0]/sf*2.83,text[i][0][1]/sf*2.83+(svgh/vpos)-(ymax/sf*2.83)+(ymax/sf/2-ymin/sf/2*2.83))
+   ctx.moveTo(((svgw)/2)-(xmax/sf/2*2.83)-(xmin/sf/2*2.83)+text[i][0][0]*2.83/sf,text[i][0][1]*2.83/sf+(svgh/vpos)-(ymax/sf*2.83)+(ymax/sf/2-ymin/sf/2*2.83))
    for(j=0;j<text[i].length;j++){
-      ctx.lineTo(((svgw)/2)-(xmax/sf/2*2.83)-(xmin/sf/2*2.83)+text[i][j][0]/sf*2.83,text[i][j][1]/sf*2.83+(svgh/vpos)-(ymax/sf*2.83)+(ymax/sf/2-ymin/sf/2*2.83))
+      ctx.lineTo(((svgw)/2)-(xmax/sf/2*2.83)-(xmin/sf/2*2.83)+text[i][j][0]*2.83/sf,text[i][j][1]*2.83/sf+(svgh/vpos)-(ymax/sf*2.83)+(ymax/sf/2-ymin/sf/2*2.83))
    }  
 }
 
