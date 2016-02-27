@@ -557,9 +557,9 @@ var vpos = 2
 //ctx.moveTo(0,0);
 //ctx.lineTo(10,10);
 for(i=0;i<text.length;i++){
-   ctx.moveTo(((svgw)/2)-(xmax/sf/2*2.83)-(xmin/sf/2*2.83)+text[i][0][0]*2.83/sf,text[i][0][1]*2.83/sf+(svgh/vpos)-(ymax/sf*2.83)+(ymax/sf/2-ymin/sf/2*2.83))
+   ctx.moveTo(((svgw)/2)-(xmax/sf/2*3.54)-(xmin/sf/2*3.54)+text[i][0][0]*3.54/sf,text[i][0][1]*3.54/sf+(svgh/vpos)-(ymax/sf*3.54)+(ymax/sf/2-ymin/sf/2*3.54))
    for(j=0;j<text[i].length;j++){
-      ctx.lineTo(((svgw)/2)-(xmax/sf/2*2.83)-(xmin/sf/2*2.83)+text[i][j][0]*2.83/sf,text[i][j][1]*2.83/sf+(svgh/vpos)-(ymax/sf*2.83)+(ymax/sf/2-ymin/sf/2*2.83))
+      ctx.lineTo(((svgw)/2)-(xmax/sf/2*3.54)-(xmin/sf/2*3.54)+text[i][j][0]*3.54/sf,text[i][j][1]*3.54/sf+(svgh/vpos)-(ymax/sf*3.54)+(ymax/sf/2-ymin/sf/2*3.54))
    }  
 }
 
