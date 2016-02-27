@@ -49,6 +49,7 @@ var svgh
 
 
 
+
 function reload(){
 
    points = []
@@ -82,7 +83,7 @@ function txtpocket(txt_string, font, size, tool){
 	 ctx = worksheetCanvas.get(0).getContext("2d");
     ctx.clearRect(0, 0, document.getElementById("worksheet-canvas").width, document.getElementById("worksheet-canvas").height);
 
-    console.log(font)
+    //console.log(font)
 
 var source = new Image();
 source.src = $('#cutoutShape').val();
@@ -498,7 +499,7 @@ ctx.strokeStyle="black"
 
 var vpos = 2
 
-console.log(ymin)
+//console.log(ymin)
 
 //ctx.moveTo(0,0);
 //ctx.lineTo(10,10);
@@ -541,11 +542,11 @@ for(i=0;i<pocket.length;i++){
       for(j2=0;j2<pocket[i][j].length;j2++){
 
          if(j2==0){
-            g+='g0x' + ((-(xmax-xmin)/25.4/sf)/2+((pocket[i][j][j2].X/100)/25.4/sf)).toFixed(3) + "y" + (((ymax+ymin)/25.4/sf/2)-(((pocket[i][j][j2].Y/100)/25.4/sf)).toFixed(3)) + '\n'
+            g+='g0x' + ((-(xmax-xmin)/25.4/sf)/2+((pocket[i][j][j2].X/100)/25.4/sf)).toFixed(3) + "y" + (((ymax+ymin)/25.4/sf/2)-(((pocket[i][j][j2].Y/100)/25.4/sf))).toFixed(3) + '\n'
          g+='g1z-' + (engrave_depth) + 'f20\n'
          }
          else{
-            g+='g1x' + ((-(xmax-xmin)/25.4/sf/2)+((pocket[i][j][j2].X/100)/25.4/sf)).toFixed(3) + "y" + (((ymax+ymin)/25.4/sf/2)-(((pocket[i][j][j2].Y/100)/25.4/sf)).toFixed(3)) + 'f30\n'
+            g+='g1x' + ((-(xmax-xmin)/25.4/sf/2)+((pocket[i][j][j2].X/100)/25.4/sf)).toFixed(3) + "y" + (((ymax+ymin)/25.4/sf/2)-(((pocket[i][j][j2].Y/100)/25.4/sf))).toFixed(3) + 'f30\n'
 
          }
 
@@ -557,25 +558,24 @@ g+='g0z0.2\n'
 } 
 
 
-
-g+='m5\n'
 g+='g0x0y0\n'
 
 // append the bat.g file to the pocketing string
+
 jQuery.get('cutouts/bat.g', function(data){
-g+= data
-});
+
+   g+=data
+   })
+  .done(function() {
+      fabmo.submitJob({
+         file : g,
+         filename : txt + '.g',
+         name : "TEXT: " + txt,
+         description : "NameTagger"
+      });
+  })
 
 
-//console.log(g)
-
-
-fabmo.submitJob({
-   file : g,
-   filename : txt + '.g',
-   name : "TEXT: " + txt,
-   description : "txtpocket"
-});
 
 
 
