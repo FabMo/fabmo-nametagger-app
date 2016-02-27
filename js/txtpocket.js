@@ -107,11 +107,13 @@ setTimeout('drawText()', 400);
 //   console.log(txt)
    fontFileName = font
    txt_size = size
+    console.log("size = " + size)  
 
    //set scale factor
    sf = parseFloat((152.4/(size*25.4)).toFixed(2))
-//   console.log(sf)
+
    tool_diameter = tool*sf
+   console.log("tool = " + tool)   
    //engrave_depth = 0.015 
    engrave_depth = $('#engraveDepth').val();
    //make pockets
