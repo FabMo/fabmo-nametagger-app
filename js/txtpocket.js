@@ -506,9 +506,9 @@ var vpos = 2
 //ctx.moveTo(0,0);
 //ctx.lineTo(10,10);
 for(i=0;i<text.length;i++){
-   ctx.moveTo(((svgw)/2)-(xmax/sf/2)-(xmin/sf/2)+text[i][0][0]/sf,text[i][0][1]/sf+(svgh/vpos)-(ymax/sf)+(ymax/sf/2-ymin/sf/2))
+   ctx.moveTo(((svgw)/2)-(xmax/sf/2*2.83)-(xmin/sf/2*2.83)+text[i][0][0]/sf*2.83,text[i][0][1]/sf*2.83+(svgh/vpos)-(ymax/sf*2.83)+(ymax/sf/2-ymin/sf/2*2.83))
    for(j=0;j<text[i].length;j++){
-      ctx.lineTo(((svgw)/2)-(xmax/sf/2)-(xmin/sf/2)+text[i][j][0]/sf,text[i][j][1]/sf+(svgh/vpos)-(ymax/sf)+(ymax/sf/2-ymin/sf/2))
+      ctx.lineTo(((svgw)/2)-(xmax/sf/2*2.83)-(xmin/sf/2*2.83)+text[i][j][0]/sf*2.83,text[i][j][1]/sf*2.83+(svgh/vpos)-(ymax/sf*2.83)+(ymax/sf/2-ymin/sf/2*2.83))
    }  
 }
 
