@@ -49,8 +49,7 @@
                         <option value="kadwa-v1-latin-regular.ttf" >Kadwa</option>    
                         <option value="lato-v11-latin-regular.ttf" >Lato</option>      
                         <option value="leckerli-one-v7-latin-regular.ttf">Leckerli One</option>
-                        <option value="lora-v9-latin-regular.ttf" >Lora</option>
-                        <option value="oleo-script-v5-latin-regular.ttf">Oleo</option>
+                        <option value="oleo-script-v5-latin-regular.ttf">Oleo Script</option>
                         <option value="open-sans-v13-latin-regular.ttf">Open Sans</option>						
                         <option value="overlock-v5-latin-regular.ttf">Overlook</option>							
                         <option value="raleway-v10-latin-regular.ttf" >Raleway</option>   
@@ -84,10 +83,11 @@
                         </select>
                     </div>
                     
-                     <div class="pure-control-group">
+ <!--                    <div class="pure-control-group">
                     <label for="cutDepth">Cutout Depth:</label>    
                    <input class="preset"type="text" id="cutDepth" maxlength="3" value="0.07" >
                     </div>
+					-->
                     
                      <div class="pure-control-group">
                     <label for="engraveDepth">Engraving Depth:</label>    
@@ -128,6 +128,13 @@ $('#fontlist').on('change', function(){
 });
 
 $('#ToEngrave').on('change', function(){
+     draw ();
+});
+
+$('#letterHeight').on('change', function(){
+     draw ();
+});
+$('#bitSize').on('change', function(){
      draw ();
 });
 
