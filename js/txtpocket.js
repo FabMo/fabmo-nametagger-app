@@ -1,4 +1,31 @@
+//********** RESIZE CANVAS **********//
+// small < 768
+// medium 768 - 1022
+// lg > 1023
+	function resizeCanvas(){
+		if (window.innerWidth > 1022) {
+			// large screen, canvas 2/3
+			// var width = window.innerWidth*(2/3);
+			var width = window.innerWidth/2;
+		} else if (window.innerWidth > 767 && window.innerWidth < 1023) {
+			// medium screen, canvas 1/2 screen
+			var width = window.innerWidth/2;
+		} else if (window.innerWidth < 768) {
+			// small screen
+			var width = window.innerWidth;
+		}
 
+		//console.log('width'+ width);
+		var ratio = worksheetCanvas.height()/worksheetCanvas.width();
+
+		var height = width;
+		//console.log('height'+ height);
+			worksheetCanvas.width(width-25)
+			worksheetCanvas.height(height-25)
+	}
+
+	window.addEventListener('load', resizeCanvas, false);
+	window.addEventListener('resize', resizeCanvas, false);
 
 var g = ""
 var gcode = []                      

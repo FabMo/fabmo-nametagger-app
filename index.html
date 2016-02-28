@@ -43,44 +43,47 @@
                   <div class="basic">
                      <div class="pure-control-group">
  
-        			<label for="font">Select your Font:</label>
+        			<label for="font">Font:</label>
                         <select name="font" id="fontlist">
-                        <option value="cherry-swash-v4-latin-regular.ttf" selected>Cherry Swash</option>
-                        <option value="kadwa-v1-latin-regular.ttf" >Kadwa</option>    
-                        <option value="lato-v11-latin-regular.ttf" >Lato</option>      
-                        <option value="leckerli-one-v7-latin-regular.ttf">Leckerli One</option>
-                        <option value="oleo-script-v5-latin-regular.ttf">Oleo Script</option>
-                        <option value="open-sans-v13-latin-regular.ttf">Open Sans</option>						
-                        <option value="overlock-v5-latin-regular.ttf">Overlook</option>							
-                        <option value="raleway-v10-latin-regular.ttf" >Raleway</option>   
-                        <option value="roboto-v15-latin-regular.ttf" >Roboto</option>       					
-                        <option value="tillana-v1-latin-regular.ttf">Tillana</option>						
-                        <option value="ubuntu-v9-latin-regular.ttf">Ubuntu</option>
+                            <option value="cherry-swash-v4-latin-regular.ttf" selected>Cherry Swash</option>
+                            <option value="kadwa-v1-latin-regular.ttf" >Kadwa</option>    
+                            <option value="lato-v11-latin-regular.ttf" >Lato</option>      
+                            <option value="leckerli-one-v7-latin-regular.ttf">Leckerli One</option>
+                            <option value="oleo-script-v5-latin-regular.ttf">Oleo Script</option>
+                            <option value="open-sans-v13-latin-regular.ttf">Open Sans</option>						
+                            <option value="overlock-v5-latin-regular.ttf">Overlook</option>							
+                            <option value="raleway-v10-latin-regular.ttf" >Raleway</option>   
+                            <option value="roboto-v15-latin-regular.ttf" >Roboto</option>       					
+                            <option value="tillana-v1-latin-regular.ttf">Tillana</option>						
+                            <option value="ubuntu-v9-latin-regular.ttf">Ubuntu</option>
                         </select>
                     </div>
                     <div class="pure-control-group">
-                    <label for="text">Enter 3 letters or characters:</label>    
-                   <input type="text" id="ToEngrave" maxlength="3" value="ABC">
+                        <label for="text">Initials:</label>    
+                        <input type="text" id="ToEngrave" maxlength="3" value="ABC">
                     </div>
                     
-                     <div class="pure-control-group">
-                    <label for="letterHeight">Letter Height:</label>    
-                   <input type="text" id="letterHeight" maxlength="5" value=".5" >
-                    </div>                  
-                     <div class="pure-control-group">
-                     <label for="shape">Nametag Shape:</label>
-                        <select class="preset" name="shape" id="cutoutShape" >
-                        <option value="cutouts/bat.svg" selected>Bat</option>
-                        <option value="cutouts/2 inch box.svg" >2 inch Box</option>    
-                        <option value="cutouts/techshop_gear.svg" >Techshop Gear</option> 						
+                    <div class="pure-control-group">
+                        <label for="shape">Shape:</label>
+                        <select name="shape" id="cutoutShape" >
+                            <option value="cutouts/bat.svg" selected>Bat</option>
+                            <option value="cutouts/armadillo.svg" >Armadillo</option>
+                            <option value="cutouts/boot.svg" >Boot</option>                                
+                            <option value="cutouts/techshop_gear.svg" >Techshop Gear</option> 						
                         </select>
-                    </div>    
+                    </div>                      
+                    
+                    <div class="pure-control-group">
+                        <label for="letterHeight">Letter Height:</label>    
+                        <input class="preset" type="text" id="letterHeight" maxlength="5" value=".5" disabled>
+                    </div>                  
+                  
  
         			<label for="bit">Bit Diameter:</label>
-                        <select class="preset" name="bit" id="bitSize" >
-                        <option value="0.03125" selected>1/32"</option>
-                        <option value="0.05" >0.05"</option>          
-                        <option value="0.0625">1/16"</option>
+                        <select class="preset" name="bit" id="bitSize" disabled>
+                            <option value="0.03125" selected>1/32"</option>
+                            <option value="0.05" >0.05"</option>          
+                            <option value="0.0625">1/16"</option>
                         </select>
                     </div>
                     
@@ -90,17 +93,19 @@
                     </div>
 					-->
                     
-                     <div class="pure-control-group">
-                    <label for="engraveDepth">Engraving Depth:</label>    
-                   <input type="text" id="engraveDepth" maxlength="6" value="0.015" >
+                    <div class="pure-control-group">
+                        <label for="engraveDepth">Engraving Depth:</label>    
+                        <input type="text" id="engraveDepth" maxlength="6" value="0.015" disabled >
                     </div>
 
                     
-                   	 <div class="pure-control-group">
-                    <div style="margin-top: 10px;">
-                      <button id="draw" type="button">Draw Text</button><p>
-                      <button id="submit" type="button" onclick="makeGcode()">Submit Job</button>
-                    </div>
+                   	<div class="pure-control-group">
+                        <div style="margin-top: 10px;">
+                            <button id="draw" type="button">Preview</button>
+                        </div>
+                        <div>
+                            <button id="submit" type="button" onclick="makeGcode()">Submit Job</button>
+                        </div>
                    </div>
                   </div>
                 </fieldset>
@@ -124,40 +129,40 @@
 
 >
 <script>
-$('#fontlist').on('change', function(){
-     draw ();
-});
+    $('#fontlist').on('change', function(){
+        draw ();
+    });
 
-$('#ToEngrave').on('change', function(){
-     draw ();
-});
+    $('#ToEngrave').on('change', function(){
+        draw ();
+    });
 
-$('#letterHeight').on('change', function(){
-     draw ();
-});
-$('#bitSize').on('change', function(){
-     draw ();
-});
+    $('#letterHeight').on('change', function(){
+        draw ();
+    });
+    $('#bitSize').on('change', function(){
+        draw ();
+    });
 
-$('#draw').on('click', function(){
-    draw()
+    $('#draw').on('click', function(){
+        draw()
+        
+    });
+
+
+    function draw (){
+        var thisString = $('#ToEngrave').val();
+            if(thisString==''){
+                thisString='BAT'
+            }
+
+        var fontSelected = "fonts/" + $('#fontlist').val();
+        var letterHt = $('#letterHeight').val();
+        var bit =  $('#bitSize').val();
+        //console.log(thisString + ", "+ fontSelected+ ", " + letterHt + ", " + bit)
+        txtpocket(thisString,fontSelected,letterHt,bit)
     
-});
-
-
-function draw (){
-   thisString = $('#ToEngrave').val();
-   if(thisString==''){
-      thisString='BAT'
-   }
-
-   var fontSelected = "fonts/" + $('#fontlist').val();
-   var letterHt = $('#letterHeight').val();
-   var bit =  $('#bitSize').val();
-   //console.log(thisString + ", "+ fontSelected+ ", " + letterHt + ", " + bit)
-	txtpocket(thisString,fontSelected,letterHt,bit)
- 
- };
+    };
  
  
 </script>
