@@ -640,48 +640,26 @@ g+='g0z0.2\n'
 
 g+='g0x0y0\n'
 
-switch($('#cutoutShape').prop('selectedIndex') ){
-	case 0:
-		jQuery.get('cutouts/bat.g', function(data){
-			g+=data
-			})
-			 .done(function() {
-				fabmo.submitJob({
-				file : g,
-				filename : txt + '.g',
-				name : "TEXT: " + txt,
-				description : "NameTagger"
-				});
-			})
-		break;
-	case 1:
-		jQuery.get('cutouts/box.g', function(data){
-			g+=data
-			})
-			 .done(function() {
-				fabmo.submitJob({
-				file : g,
-				filename : txt + '.g',
-				name : "TEXT: " + txt,
-				description : "NameTagger"
-				});
-			})
-		break;	
-	case 2:
-		jQuery.get('cutouts/techshop_gear.g', function(data){
-			g+=data
-			})
-			 .done(function() {
-				fabmo.submitJob({
-				file : g,
-				filename : txt + '.g',
-				name : "TEXT: " + txt,
-				description : "NameTagger"
-				});
-			})
-		break;
-}
 
+var cutoutPath = document.getElementById("cutoutShape").value
+cutoutPath = cutoutPath.replace('.svg', '.g')
+
+
+jQuery.get(cutoutPath, function(data){
+	g+=data
+})
+	.done(function() {
+
+	cutoutPath=cutoutPath.replace('cutouts/','')
+	cutoutPath=cutoutPath.replace('.g','')	
+	
+	fabmo.submitJob({
+	file : g,
+	filename : txt + '.g',
+	name : "TEXT: " + txt,
+	description : "NameTagger: " + cutoutPath
+	});
+})
 
 
 
