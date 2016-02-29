@@ -13,7 +13,7 @@
     <script src="js/opentype.min.js"></script>
     <script src="js/snap.svg-min.js"></script>
     <script src="js/clipper.js"></script>
-    <script src="js/txtpocket.js"></script>    
+    <script src="js/txtpocket.js"></script> 
     <script src="js/fabmo.js"></script>
     <script type="text/javascript">
         var fabmo = new FabMoDashboard();
@@ -27,7 +27,7 @@
       <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-2-3 image-container">
 				 <!-- <div class="worksheet"> -->
   				<!-- <div id="canvas-holder"> -->
-    				<canvas id="worksheetCanvas"  height="600" width="500" style="width: 600px; height: 500px;">
+    				<canvas id="worksheetCanvas"  height="600" width="600" style="width: 935px; height: 935px;">
                           
                     </canvas>
           <!-- </div> -->
@@ -76,7 +76,7 @@
                     
                     <div class="pure-control-group">
                         <label for="letterHeight">Letter Height:</label>    
-                        <input class="preset" type="text" id="letterHeight" maxlength="5" value=".5" disabled>
+                        <input class="preset" type="text" id="letterHeight" maxlength="5" value=".5" >
                     </div>                  
                   
  
@@ -137,7 +137,11 @@
     $('#ToEngrave').on('change', function(){
         draw ();
     });
-
+	
+    $('#cutoutShape').on('change', function(){
+        draw ();
+    });
+	
     $('#letterHeight').on('change', function(){
         draw ();
     });
