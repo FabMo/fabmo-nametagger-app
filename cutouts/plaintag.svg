@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created by Vectric (http://www.vectric.com/) -->
+<svg width="3.00000000in" height="1.50000000in" viewBox="0 0 3.00000000 1.50000000" id="svg2" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+    <g inkscape:groupmode="layer" id="4ac99bcd-324b-4e32-a992-71564f19513e" inkscape:label="Layer 1">
+        <path style="fill:none;stroke-width:0.010000;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke:#000000;" d="M 0.139531,0.500000 L 0.139531,1.000000 A 0.250000,0.250000 0 0,0 0.389531,1.250000 L 2.389531,1.250000 A 0.250000,0.250000 0 0,0 2.639531,1.000000 L 2.639531,0.500000 A 0.250000,0.250000 0 0,0 2.389531,0.250000 L 0.389531,0.250000 A 0.250000,0.250000 0 0,0 0.139531,0.500000 "/>
+        <path style="fill:none;stroke-width:0.010000;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke:#000000;" d="M 0.367448,0.750000 A 0.062500,0.062500 0 0,0 0.304948,0.687500 A 0.062500,0.062500 0 0,0 0.242448,0.750000 A 0.062500,0.062500 0 0,0 0.304948,0.812500 A 0.062500,0.062500 0 0,0 0.367448,0.750000 "/>
+    </g>
+    <g inkscape:groupmode="layer" id="7ccff119-aaeb-43c8-8d55-6f1f0bada2eb" inkscape:label="text"/>
+    <g inkscape:groupmode="layer" id="98f8fa1f-dbab-4e81-91c5-5ec1bc5d7143" inkscape:label="bounding box">
+        <path style="fill:none;stroke-width:0.010000;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke:#e9e9e9;" d="M 0.000000,1.500000 L 3.000000,1.500000 L 3.000000,0.000000 L 0.000000,0.000000 L 0.000000,1.500000 "/>
+    </g>
+</svg>
