@@ -8,7 +8,8 @@ body {
 
 canvas{
 	background:#E9E9E9;
-
+    width: 85%;
+    height: auto;
        
    }
   
@@ -93,9 +94,6 @@ canvas{
 		left: 5%;
 		bottom: -20%;
 		font-size: 1.2em;
-	}
-	canvas {
-		/*height: 400px;*/
 	}
 }
 @media only screen and (max-width: 520px){
