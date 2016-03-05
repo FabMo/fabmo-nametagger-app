@@ -686,7 +686,7 @@ var OneYChunk
     g += 'g0z0.2\n'
   }
  
-  
+  //console.log(g) 
   // keep track of total Y cut
   TrackY = (TrackY * 1) + (YExtents * 1);
   
