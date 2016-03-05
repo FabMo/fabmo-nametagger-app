@@ -49,6 +49,39 @@ var svgh
 var tool
 var targeth
 var sf2
+var TrackY
+var TotalY
+var Reset = 0
+
+
+
+
+function ResetVals() {
+    Reset = 1
+    console.log("clicked")
+    
+}
+
+    if  (Reset == 1){
+        TrackY = 0.0;
+        TotalY = 0.0;
+       
+        console.log("TrackY = reset " + TrackY );
+        console.log("TotalY = reset " + TotalY );
+        
+    }
+    else
+    {
+        
+        TrackY = (localStorage.getItem('TrackY')) || 0;
+        TotalY = (localStorage.getItem('TotalY')) || 0; 
+        console.log("TrackY = " + TrackY );
+        console.log("TotalY = " + TotalY );
+    };
+
+
+TrackY = parseFloat(TrackY).toFixed(3);
+//console.log(TrackY / 2)
 
 //********** RESIZE CANVAS **********//
 // small < 768
@@ -78,6 +111,8 @@ function resizeCanvas() {
 
 window.addEventListener('load', resizeCanvas, false);
 window.addEventListener('resize', resizeCanvas, false);
+
+
 
 function reload() {
 
@@ -136,14 +171,14 @@ function txtpocket(txt_string, font, size, tool) {
     //   console.log(txt)
   fontFileName = font
   txt_size = size
-  console.log("size = " + size)
+  //console.log("size = " + size)
   targeth = size
 
   //set scale factor
   sf = parseFloat((152.4 / (size * 25.4)).toFixed(2))
   tool_diameter = tool
 
-  console.log("tool = " + tool)
+  //console.log("tool = " + tool)
     //engrave_depth = 0.015 
   engrave_depth = $('#engraveDepth').val();
   //make pockets
@@ -584,9 +619,49 @@ function drawText() {
 
 function makeGcode() {
 
+var XOffset
+var YOffset
+var XExtents
+var YExtents 
+var OneYChunk
+
+    
+  var header = document.getElementById("cutoutShape").value
+   header = header.replace('.svg', '.txt')
+   jQuery.get(header, function(data) {
+      
+          var CenterOffset = data.split(',');            
+          XOffset = parseFloat(CenterOffset[0]).toFixed(3);
+          YOffset = parseFloat(CenterOffset[1]).toFixed(3);
+          XExtents = parseFloat(CenterOffset[2]).toFixed(3);
+          YExtents = parseFloat(CenterOffset[3]).toFixed(3);
+    })
+    .done(function() {  
+ 
+
+  OneYChunk = (TrackY * 1) + (YExtents * 1);  
+  TotalY = (TotalY * 1) + (YExtents * 1);
+  // console.log("TotalY = " + TotalY) 
+  var TileWarning = ("Next tag: " + TrackY)
+  if (TotalY > 16 ){
+     TileWarning = "Move Over 4 inches before cutting!!"
+     console.log("over")
+     TrackY = 0.0
+     OneYChunk = 0.0
+     TotalY = 0.0
+ } 
+
+ if (OneYChunk > 8 ){
+    TileWarning = "Move the Handibot so that Y0 is just above the top of the last part!!"
+     console.log("moveUp")
+     TrackY = 0.0
+ }
+ 
+ 
   g += 'g20\n'
   g += 'g0z0.2\n'
-  g += 'g0x0y0\n'
+  g += 'g0x' + (XOffset * 1) + ' y' + ((TrackY * 1) + (YOffset * 1)) + '\n'
+  g += 'G92 X0.0 Y0.0\n'
   g += 'm4\n'
 
   //pocket scale down and convert to inches
@@ -610,12 +685,24 @@ function makeGcode() {
     }
     g += 'g0z0.2\n'
   }
+ 
+  
+  // keep track of total Y cut
+  TrackY = (TrackY * 1) + (YExtents * 1);
+  
+  if (Reset == 1) {
+      TileWarning += " : RESET"
+      TrackY = 0
+      TotalY = 0
+  }
 
-  g += 'g0x0y0\n'
+  
+  localStorage.setItem('TrackY', TrackY);
+  localStorage.setItem('TotalY', TotalY);
 
   var cutoutPath = document.getElementById("cutoutShape").value
   cutoutPath = cutoutPath.replace('.svg', '.g')
-
+ 
   jQuery.get(cutoutPath, function(data) {
       g += data
     })
@@ -623,15 +710,16 @@ function makeGcode() {
 
       cutoutPath = cutoutPath.replace('cutouts/', '')
       cutoutPath = cutoutPath.replace('.g', '')
-
+    g += 'g90\n'
+    g += 'g0x0y0\n'
       fabmo.submitJob({
         file: g,
         filename: txt + '.g',
-        name: "TEXT: " + txt,
+        name: "TEXT: " + txt + ": " + TileWarning,
         description: "NameTagger: " + cutoutPath
       });
     })
-
+})
 }
 
 

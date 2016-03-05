@@ -76,7 +76,7 @@
                     
                     <div class="pure-control-group">
                         <label for="letterHeight">Letter Height:</label>    
-                        <input class="preset" type="text" id="letterHeight" maxlength="5" value=".5" >
+                        <input class="preset" type="text" id="letterHeight" maxlength="5" value=".5" disabled >
                     </div>                  
                   
  
@@ -106,6 +106,9 @@
                         </div>
                         <div>
                             <button id="submit" type="button" onclick="makeGcode()">Submit Job</button>
+                        </div>
+                        <div>
+                            <button id="reset" type="button" onclick="ResetVals()">Reset</button>
                         </div>
                    </div>
                   </div>
