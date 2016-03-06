@@ -651,7 +651,7 @@ var MaxYVal = $('#MaxYVal').val();
     OneYChunk = (TrackY * 1) + (YExtents * 1);  
     TotalY = (TotalY * 1) + (YExtents * 1);
     // console.log("TotalY = " + TotalY) 
-    var TileWarning = ("Next tag: " + TrackY)
+    var TileWarning = ("Start of tag: " + TrackY)
     if (TotalY > MaxYVal ){
         TileWarning = "Move Over " + MaxXVal + " before cutting file!!"
         console.log("over")
@@ -662,7 +662,7 @@ var MaxYVal = $('#MaxYVal').val();
     } 
 
     if (OneYChunk > 8 ){
-        TileWarning = "Move the Handibot so that Y0 is just above the top of the last part!!"
+        TileWarning = "Move the Handibot up " + TrackY + " so that Y0 is just above the top of the last part!!"
         console.log("moveUp")
         TrackY = 0.0
     }
@@ -701,7 +701,7 @@ var MaxYVal = $('#MaxYVal').val();
   TrackY = (TrackY * 1) + (YExtents * 1);
   
   if (Reset == 1) {
-      TileWarning += " : RESET"
+      TileWarning = "COORDINATES HAVE BEEN RESET : DISCARD!!!"
       TrackY = 0
       TotalY = 0
   }
