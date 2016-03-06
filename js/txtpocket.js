@@ -54,6 +54,10 @@ var TotalY
 var Reset = 0
 var MaxXVal
 
+
+
+
+
 function ResetVals() {
     Reset = 1
     console.log("clicked")
@@ -642,12 +646,13 @@ var OneYChunk
     })
     .done(function() {  
  
+var MaxYVal = $('#MaxYVal').val();
 
     OneYChunk = (TrackY * 1) + (YExtents * 1);  
     TotalY = (TotalY * 1) + (YExtents * 1);
     // console.log("TotalY = " + TotalY) 
     var TileWarning = ("Next tag: " + TrackY)
-    if (TotalY > 16 ){
+    if (TotalY > MaxYVal ){
         TileWarning = "Move Over " + MaxXVal + " before cutting file!!"
         console.log("over")
         TrackY = 0.0
