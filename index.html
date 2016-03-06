@@ -73,7 +73,17 @@
                             <option value="cutouts/plaintag.svg" >Plain Tag</option> 							
                         </select>
                     </div>                      
-                    
+                    	<div class="pure-control-group">
+                        <div style="margin-top: 10px;">
+                            <button id="draw" type="button">Preview</button>
+                        </div>
+                        <div>
+                            <button id="submit" type="button" onclick="makeGcode()">Submit Job</button>
+                        </div>
+                        
+						
+					
+                   </div>
                     <div class="pure-control-group">
                         <label for="letterHeight">Letter Height:</label>    
                         <input class="preset" type="text" id="letterHeight" maxlength="5" value=".5" disabled >
@@ -101,15 +111,12 @@
 
                     
                    	<div class="pure-control-group">
-                        <div style="margin-top: 10px;">
-                            <button id="draw" type="button">Preview</button>
-                        </div>
+                       
                         <div>
-                            <button id="submit" type="button" onclick="makeGcode()">Submit Job</button>
+                            <button id="reset" type="button" onclick="ResetVals()">Reset Axis zeros!!!!</button>
                         </div>
-                        <div>
-                            <button id="reset" type="button" onclick="ResetVals()">Reset</button>
-                        </div>
+						
+					
                    </div>
                   </div>
                 </fieldset>

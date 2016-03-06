@@ -152,7 +152,19 @@ select{
 	-moz-box-sizing: border-box;
  		 box-sizing: border-box;
 }
-
+#reset {
+	width: 50%;
+	max-width: 150px;
+	background-color: #FF0000;
+	color: #eeeeee;
+	margin: 1em;
+    
+	border: 1px solid #32B433;;
+	border-radius: 5px;
+	line-height: 2em;
+	-moz-box-sizing: border-box;
+ 		 box-sizing: border-box;
+}
 
 .content{
 	padding-top: 1em;
