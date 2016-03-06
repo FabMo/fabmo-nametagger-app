@@ -72,27 +72,21 @@
                             <option value="cutouts/techshop_gear.svg" >Techshop Gear</option> 	
                             <option value="cutouts/plaintag.svg" >Plain Tag</option> 							
                         </select>
-                    </div>                      
-                    	<div class="pure-control-group">
-                        <div style="margin-top: 10px;">
-                            <button id="draw" type="button">Preview</button>
-                        </div>
-                        <div>
-                            <button id="submit" type="button" onclick="makeGcode()">Submit Job</button>
-                        </div>
-                        
-						
-					
-                   </div>
-                    <div class="pure-control-group">
-                        <label for="letterHeight">Letter Height:</label>    
-                        <input class="preset" type="text" id="letterHeight" maxlength="5" value=".5" disabled >
+                    </div>  
+                    <div class="pure-control-group">  
+                        <label for="Unlock">UNLOCK!</label>
+                        <input type="Checkbox" id="Unlock" placeholder="Unlock">  
+                    </div>  
+                    
+                     <div class="pure-control-group">
+                        <label for="letterHeight" disabled hidden>Letter Height:</label>    
+                        <input class="preset" type="text" id="letterHeight" maxlength="5" value=".5" disabled hidden >
 						
                     </div>                  
                   
  
-        			<label for="bit">Bit Diameter:</label>
-                        <select class="preset" name="bit" id="bitSize" disabled>
+        			<label for="bit" disabled hidden>Bit Diameter:</label>
+                        <select class="preset" name="bit" id="bitSize" disabled hidden>
                             <option value="0.03125" selected>1/32"</option>
                             <option value="0.05" >0.05"</option>          
                             <option value="0.0625">1/16"</option>
@@ -100,23 +94,29 @@
                     </div>
 					
                     <div class="pure-control-group">
-                        <label for="engraveDepth">Engraving Depth:</label>    
-                        <input class="preset" type="text" id="engraveDepth" maxlength="6" value="0.015" disabled >
+                        <label for="engraveDepth" disabled hidden>Engraving Depth:</label>    
+                        <input class="preset" type="text" id="engraveDepth" maxlength="6" value="0.015" disabled hidden >
                     </div>
 					
 					<div class="pure-control-group">
-						<label for="MaxYVal">Cutting Extents (Y):</label>    
-						<input class="preset" type="text" id="MaxYVal" maxlength="2" value="16" disabled >
+						<label for="MaxYVal" disabled hidden>Cutting Extents (Y):</label>    
+						<input class="preset" type="text" id="MaxYVal" maxlength="2" value="16" disabled hidden>
                     </div>
                     
                    	<div class="pure-control-group">                       
                         <div>
-                            <button id="reset" type="button" onclick="ResetVals()">Reset Axis zeros!!!!</button>
+                            <button id="reset" class="preset" type="button" disabled hidden onclick="ResetVals()">Reset Axis zeros!!!!</button>
+                        </div>					
+                   </div>               
+                    <div class="pure-control-group">
+                        <div style="margin-top: 10px;">
+                            <button id="draw" type="button">Preview</button>
                         </div>
-						<label for="Unlock">UNLOCK!</label>
-                        <input type="Checkbox" id="Unlock" placeholder="Unlock">
-					
+                        <div>
+                            <button id="submit" type="button" onclick="makeGcode()">Submit Job</button>
+                        </div>					
                    </div>
+
                   </div>
                 </fieldset>
               </form>
@@ -142,9 +142,16 @@
      $('#Unlock').on('click', function() {
          
          if ($('#Unlock').prop('checked')) {
-				$('.preset').removeAttr('disabled');;
+				$('.preset').removeAttr('disabled');
+				 $('.preset').removeAttr('hidden');
+                 $('#draw').attr("hidden", "true"); 
+                  $('#submit').attr("hidden", "true");
             } else {
 				$('.preset').attr("disabled", "true"); 
+				$('.preset').attr("hidden", "true"); 
+                 $('#draw').removeAttr('hidden'); 
+                  $('#submit').removeAttr('hidden');                
+
             }
           
         console.log("unlocked")
