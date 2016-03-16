@@ -68,10 +68,10 @@
                         <select name="shape" id="cutoutShape" >
                             <option value="cutouts/bat.svg" selected>Bat</option>
                             <option value="cutouts/armadillo.svg" >Armadillo</option>
-                            <option value="cutouts/boot.svg" >Boot</option>                                
-                            <option value="cutouts/techshop_gear.svg" >Techshop Gear</option> 	
+                            <option value="cutouts/boot.svg" >Boot</option> 
+                            <option value="cutouts/dogbone.svg" >Dogbone Tag</option>	                                                         	
                             <option value="cutouts/plaintag.svg" >Plain Tag</option> 
-                            <option value="cutouts/dogbone.svg" >Dogbone Tag</option>							
+						
                         </select>
                     </div>  
                     <div class="pure-control-group">  
@@ -80,13 +80,13 @@
                     </div>  
                     
                      <div class="pure-control-group">
-                        <label for="letterHeight" disabled hidden>Letter Height:</label>    
+                        <label class="preset" for="letterHeight" disabled hidden>Letter Height:</label>    
                         <input class="preset" type="text" id="letterHeight" maxlength="5" value=".5" disabled hidden >
 						
                     </div>                  
                   
  
-        			<label for="bit" disabled hidden>Bit Diameter:</label>
+        			<label class="preset" for="bit" disabled hidden>Bit Diameter:</label>
                         <select class="preset" name="bit" id="bitSize" disabled hidden>
                             <option value="0.03125" selected>1/32"</option>
                             <option value="0.05" >0.05"</option>          
@@ -95,13 +95,13 @@
                     </div>
 					
                     <div class="pure-control-group">
-                        <label for="engraveDepth" disabled hidden>Engraving Depth:</label>    
+                        <label class="preset" for="engraveDepth" disabled hidden>Engraving Depth:</label>    
                         <input class="preset" type="text" id="engraveDepth" maxlength="6" value="0.015" disabled hidden >
                     </div>
 					
 					<div class="pure-control-group">
-						<label for="MaxYVal" disabled hidden>Cutting Extents (Y):</label>    
-						<input class="preset" type="text" id="MaxYVal" maxlength="2" value="16" disabled hidden>
+						<label class="preset" for="MaxYVal" disabled hidden>Cutting Extents (Y):</label>    
+						<input class="preset" type="text" id="MaxYVal" maxlength="2" value="12" disabled hidden>
                     </div>
                     
                    	<div class="pure-control-group">                       
@@ -140,6 +140,20 @@
 
 >
 <script>
+        var MaxYVal = (localStorage.getItem('MaxYVal')) || 0; 
+        $('#MaxYVal').val(MaxYVal);
+        var bitIndex = (localStorage.getItem('bitSize')) || 0;
+        
+        $('#bitSize option')[bitIndex].selected = true;
+      //$("#bitSize").val(bitIndex);
+        var engraveDepth = (localStorage.getItem('engraveDepth')) || 0; 
+        $('#engraveDepth').val(engraveDepth); 
+       
+
+        
+        var letterHeight = (localStorage.getItem('letterHeight')) || 0;
+        $('#letterHeight').val(letterHeight)
+
      $('#Unlock').on('click', function() {
          
          if ($('#Unlock').prop('checked')) {
@@ -147,15 +161,16 @@
 				 $('.preset').removeAttr('hidden');
                  $('#draw').attr("hidden", "true"); 
                   $('#submit').attr("hidden", "true");
+     
             } else {
+              
 				$('.preset').attr("disabled", "true"); 
 				$('.preset').attr("hidden", "true"); 
                  $('#draw').removeAttr('hidden'); 
-                  $('#submit').removeAttr('hidden');                
-
-            }
+                  $('#submit').removeAttr('hidden');   
+                 }
           
-        console.log("unlocked")
+
         
     });   
     
@@ -186,6 +201,9 @@
 
 
     function draw (){
+        
+       
+          
         var thisString = $('#ToEngrave').val();
             if(thisString==''){
                 thisString='BAT'

@@ -53,40 +53,41 @@ var TrackY
 var TotalY
 var Reset = 0
 var MaxXVal
+var MaxYVal
+var tool_diameter
+var xMax
+var yMax
 
-
-
-
+fabmo.getConfig(function(err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      xMax = data.machine.envelope.xmax;
+      yMax = data.machine.envelope.ymax;
+    }
 
 function ResetVals() {
     Reset = 1
-    console.log("clicked")
-    
+    $('#reset').css('background-color', '#00FF00');
+   
 }
 
     if  (Reset == 1){
         TrackY = 0.0;
         TotalY = 0.0;
-        MaxXVal = -1.0
-       
-        console.log("TrackY = reset " + TrackY );
-        console.log("TotalY = reset " + TotalY );
-        
-        
+        MaxXVal = -1.0       
     }
     else
     {
         
         TrackY = (localStorage.getItem('TrackY')) || 0;
         TotalY = (localStorage.getItem('TotalY')) || 0;
-         MaxXVal = (localStorage.getItem('MaxXVal')) || 0;        
-        console.log("TrackY = " + TrackY );
-        console.log("TotalY = " + TotalY );
+         MaxXVal = (localStorage.getItem('MaxXVal')) || 0;   
     };
 
-
+     
 TrackY = parseFloat(TrackY).toFixed(3);
-//console.log(TrackY / 2)
+
 
 //********** RESIZE CANVAS **********//
 // small < 768
@@ -105,11 +106,11 @@ function resizeCanvas() {
     var width = window.innerWidth;
   }
   worksheetCanvas = $('#worksheet-canvas');
-  //console.log('width'+ width);
+
   var ratio = worksheetCanvas.height() / worksheetCanvas.width();
 
   var height = width;
-  //console.log('height'+ height);
+
   worksheetCanvas.width(width - 25)
   worksheetCanvas.height(height - 25)
 }
@@ -153,7 +154,7 @@ function txtpocket(txt_string, font, size, tool) {
   ctx = worksheetCanvas.get(0).getContext("2d");
   ctx.clearRect(0, 0, document.getElementById("worksheetCanvas").width, document.getElementById("worksheetCanvas").height);
 
-  //console.log(font)
+
 
   var source = new Image();
   source.src = $('#cutoutShape').val();
@@ -170,22 +171,23 @@ function txtpocket(txt_string, font, size, tool) {
 
   }
 
-  //   console.log('text: ' + txt_string + '\nfont: ' + font + '\nsize: ' + size + '\ntool diameter: ' + tool)
+
 
   txt = txt_string
-    //   console.log(txt)
+
   fontFileName = font
   txt_size = size
-  //console.log("size = " + size)
+
   targeth = size
 
   //set scale factor
   sf = parseFloat((152.4 / (size * 25.4)).toFixed(2))
   tool_diameter = tool
 
-  //console.log("tool = " + tool)
+
     //engrave_depth = 0.015 
-  engrave_depth = $('#engraveDepth').val();
+ // engrave_depth = $('#engraveDepth').val();
+  //console.log( "after set = " + engrave_depth)
   //make pockets
   loadtxt()
 
@@ -330,10 +332,9 @@ function onFontLoaded(font) {
     ymax = (Math.max.apply(Math, y))
   }
 
-  //console.log(points)
-  //console.log(dots)
+
   var sf2 = (targeth / (Math.abs(ymin / 25.4 / sf)))
-    //console.log(targeth/(Math.abs(ymin/25.4/sf)))
+
   x = []
   y = []
 
@@ -372,10 +373,10 @@ function onFontLoaded(font) {
   }
 
   //size
-  //console.log(Math.abs(ymin/25.4/sf))
+
   //sf = parseFloat((152.4/(size*25.4)).toFixed(2))
   tool_diameter = tool_diameter * sf
-    //console.log(tool_diameter)
+
 
   ClipperLib.JS.ScaleUpPaths(points, scale)
 
@@ -395,18 +396,18 @@ function onFontLoaded(font) {
 
     if (i == 1) {
       co.Execute(offsetted_paths, -(tool_diameter / 2 * 25.4) * scale)
-        //   console.log(i)
+
     } else {
 
       co.Execute(offsetted_paths, -((tool_diameter / 2 * 25.4) * j2) * scale)
         //   co.Execute(offsetted_paths,-(((tool_diameter/2*25.4)*2)+((tool_diameter/2*25.4)*i*0.8) * scale))
-        //   console.log(j2)
+
     }
 
     j2 += 0.7
 
     pocket.push(offsetted_paths)
-      //   console.log(i);
+
     i++
 
     if (pocket[i - 2].length == 0) {
@@ -450,7 +451,7 @@ function onFontLoaded(font) {
       inpg = ClipperLib.Clipper.PointInPolygon(pt, pocket_o[j])
 
       if (inpg == 1) {
-        //console.log("pg: " + i + " is in pg: " + j);
+
         pocket[0].push(pocket_o[i])
         pocket_o.splice(i, 1)
         i = i - 1
@@ -560,24 +561,24 @@ function onFontLoaded(font) {
 
   var l2r = [];
   //sort array from left to right
-  //console.log(pocket)
+
 
   for (i = 0; i < pocket.length; i++) {
-    //console.log(pocket[i][0][0].X + " " + i);
+
     l2r.push({
       index: i,
       x: pocket[i][0][0].X
     });
   }
 
-  //console.log(l2r);
+
 
   l2r.sort(function(a, b) {
     return parseFloat(a.x) - parseFloat(b.x);
   });
 
   pockets = [];
-  //console.log(l2r)
+
   for (i = 0; i < l2r.length; i++) {
 
     pockets.push(pocket[l2r[i].index]);
@@ -596,8 +597,6 @@ function drawText() {
 
   var vpos = 2
 
-  //console.log(svgw)
-  //console.log(text)
 
   //ctx.moveTo(0,0);
   //ctx.lineTo(10,10);
@@ -630,7 +629,8 @@ var XExtents
 var YExtents 
 var OneYChunk
 
-    
+   engrave_depth = $('#engraveDepth').val();
+  console.log( "after set = " + engrave_depth)  
   var header = document.getElementById("cutoutShape").value
    header = header.replace('.svg', '.txt')
    jQuery.get(header, function(data) {
@@ -646,24 +646,26 @@ var OneYChunk
     })
     .done(function() {  
  
-var MaxYVal = $('#MaxYVal').val();
+    MaxYVal = $('#MaxYVal').val();
+    
 
     OneYChunk = (TrackY * 1) + (YExtents * 1);  
     TotalY = (TotalY * 1) + (YExtents * 1);
-    // console.log("TotalY = " + TotalY) 
+ 
     var TileWarning = ("Start of tag: " + TrackY)
+    
     if (TotalY > MaxYVal ){
         TileWarning = "Move Over " + MaxXVal + " before cutting file!!"
-        console.log("over")
+
         TrackY = 0.0
         OneYChunk = 0.0
         TotalY = 0.0
         MaxXVal = -1.0
     } 
 
-    if (OneYChunk > 8 ){
+    if (OneYChunk > yMax ){
         TileWarning = "Move the Handibot up " + TrackY + " so that Y0 is just above the top of the last part!!"
-        console.log("moveUp")
+
         TrackY = 0.0
     }
     
@@ -706,10 +708,19 @@ var MaxYVal = $('#MaxYVal').val();
       TotalY = 0
   }
 
-  
+  var saveBit = $('#bitSize').prop('selectedIndex')
+  //console.log("index = " + saveBit)
   localStorage.setItem('TrackY', TrackY);
   localStorage.setItem('TotalY', TotalY);
   localStorage.setItem('MaxXVal', MaxXVal);
+  localStorage.setItem('MaxYVal', MaxYVal);
+  localStorage.setItem('bitSize', saveBit);
+
+  localStorage.setItem('engraveDepth', engrave_depth);
+  localStorage.setItem('letterHeight', txt_size);  
+
+  
+ 
 
   var cutoutPath = document.getElementById("cutoutShape").value
   cutoutPath = cutoutPath.replace('.svg', '.g')
