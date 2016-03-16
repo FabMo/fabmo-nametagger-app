@@ -55,16 +55,9 @@ var Reset = 0
 var MaxXVal
 var MaxYVal
 var tool_diameter
-var xMax
-var yMax
+var ySize = 7.999
 
-fabmo.getConfig(function(err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      xMax = data.machine.envelope.xmax;
-      yMax = data.machine.envelope.ymax;
-    }
+
 
 function ResetVals() {
     Reset = 1
@@ -630,7 +623,7 @@ var YExtents
 var OneYChunk
 
    engrave_depth = $('#engraveDepth').val();
-  console.log( "after set = " + engrave_depth)  
+  
   var header = document.getElementById("cutoutShape").value
    header = header.replace('.svg', '.txt')
    jQuery.get(header, function(data) {
@@ -647,6 +640,7 @@ var OneYChunk
     .done(function() {  
  
     MaxYVal = $('#MaxYVal').val();
+    console.log(MaxYVal)
     
 
     OneYChunk = (TrackY * 1) + (YExtents * 1);  
@@ -663,7 +657,7 @@ var OneYChunk
         MaxXVal = -1.0
     } 
 
-    if (OneYChunk > yMax ){
+    if (OneYChunk > ySize ){
         TileWarning = "Move the Handibot up " + TrackY + " so that Y0 is just above the top of the last part!!"
 
         TrackY = 0.0
