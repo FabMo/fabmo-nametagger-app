@@ -55,7 +55,7 @@ var Reset = 0
 var MaxXVal
 var MaxYVal
 var tool_diameter
-var ySize = 7.999
+var ySize = 8
 
 
 
@@ -657,7 +657,7 @@ var OneYChunk
         MaxXVal = -1.0
     } 
 
-    if (OneYChunk > ySize ){
+    else if (OneYChunk > ySize ){
         TileWarning = "Move the Handibot up " + TrackY + " so that Y0 is just above the top of the last part!!"
 
         TrackY = 0.0

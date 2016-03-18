@@ -140,18 +140,18 @@
 
 >
 <script>
-        var MaxYVal = (localStorage.getItem('MaxYVal')) || 0; 
+        var MaxYVal = (localStorage.getItem('MaxYVal')) || 8; 
         $('#MaxYVal').val(MaxYVal);
         var bitIndex = (localStorage.getItem('bitSize')) || 0;
         
         $('#bitSize option')[bitIndex].selected = true;
       //$("#bitSize").val(bitIndex);
-        var engraveDepth = (localStorage.getItem('engraveDepth')) || 0; 
+        var engraveDepth = (localStorage.getItem('engraveDepth')) || 0.02; 
         $('#engraveDepth').val(engraveDepth); 
        
 
         
-        var letterHeight = (localStorage.getItem('letterHeight')) || 0;
+        var letterHeight = (localStorage.getItem('letterHeight')) || 0.5;
         $('#letterHeight').val(letterHeight)
 
      $('#Unlock').on('click', function() {
