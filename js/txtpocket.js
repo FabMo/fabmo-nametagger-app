@@ -59,6 +59,9 @@ var ySize = 8
 
 
 
+ 
+
+
 function ResetVals() {
     Reset = 1
     //$('#reset').css('background-color', '#00FF00');
@@ -628,6 +631,16 @@ var XExtents
 var YExtents 
 var OneYChunk
 var TileWarning 
+    fabmo.getConfig(function(err, data) {
+        if (err) {
+        console.log(err);
+        } else {
+
+        ySize = data.machine.envelope.ymax;
+        console.log("ySize = " + ySize);
+
+        }
+    });
 
    engrave_depth = $('#engraveDepth').val();
   
@@ -647,7 +660,7 @@ var TileWarning
     .done(function() {  
  
     MaxYVal = $('#MaxYVal').val();
-    console.log(MaxYVal)
+    //console.log(MaxYVal)
     
 
     OneYChunk = (TrackY * 1) + (YExtents * 1);  
