@@ -61,7 +61,13 @@ var ySize = 8
 
 function ResetVals() {
     Reset = 1
-    $('#reset').css('background-color', '#00FF00');
+    //$('#reset').css('background-color', '#00FF00');
+    $('.preset').attr("disabled", "true"); 
+				$('.preset').attr("hidden", "true"); 
+                 $('#draw').removeAttr('hidden'); 
+                  $('#submit').removeAttr('hidden');  
+                  $('#lockLabel').text("Unlock settings") 
+           
    
 }
 
@@ -621,6 +627,7 @@ var YOffset
 var XExtents
 var YExtents 
 var OneYChunk
+var TileWarning 
 
    engrave_depth = $('#engraveDepth').val();
   
@@ -646,7 +653,7 @@ var OneYChunk
     OneYChunk = (TrackY * 1) + (YExtents * 1);  
     TotalY = (TotalY * 1) + (YExtents * 1);
  
-    var TileWarning = ("Start of tag: " + TrackY)
+
     
     if (TotalY > MaxYVal ){
         TileWarning = "Move Over " + MaxXVal + " before cutting file!!"
@@ -661,6 +668,9 @@ var OneYChunk
         TileWarning = "Move the Handibot up " + TrackY + " so that Y0 is just above the top of the last part!!"
 
         TrackY = 0.0
+    }
+    else{
+        TileWarning = ("Start of tag: " + TrackY)
     }
     
     

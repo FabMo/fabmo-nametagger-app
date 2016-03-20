@@ -75,7 +75,7 @@
                         </select>
                     </div>  
                     <div class="pure-control-group">  
-                        <label for="Unlock">Unlock settings</label>
+                        <label id="lockLabel" for="Unlock">Unlock settings</label>
                         <input type="Checkbox" id="Unlock" placeholder="Unlock">  
                     </div>  
                     
@@ -161,13 +161,15 @@
 				 $('.preset').removeAttr('hidden');
                  $('#draw').attr("hidden", "true"); 
                   $('#submit').attr("hidden", "true");
+                  $('#lockLabel').text("Lock settings");
      
             } else {
               
 				$('.preset').attr("disabled", "true"); 
 				$('.preset').attr("hidden", "true"); 
                  $('#draw').removeAttr('hidden'); 
-                  $('#submit').removeAttr('hidden');   
+                  $('#submit').removeAttr('hidden');  
+                  $('#lockLabel').text("Unlock settings") 
                  }
           
 
