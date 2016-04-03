@@ -621,6 +621,22 @@ function drawText() {
 
   ctx.stroke()
 
+  ctx.beginPath()
+  ctx.lineWidth = "1"
+  ctx.strokeStyle = 'rgba(200,0,200,1)'
+
+//pockets
+
+for (i = 0; i < pockets.length; i++) {
+  for (j = 0; j < pockets[i].length; j++) {
+    ctx.moveTo(((svgw) / 2) - (xmax / sf / 2 * 3.54) - (xmin / sf / 2 * 3.54) + (pockets[i][j][0].X/100) * 3.54 / sf, (pockets[i][j][0].Y/100) * 3.54 / sf + (svgh / vpos) - (ymax / sf * 3.54) + (ymax / sf / 2 - ymin / sf / 2 * 3.54))
+    for (j2 = 0; j2 < pockets[i][j].length; j2++) {
+      ctx.lineTo(((svgw) / 2) - (xmax / sf / 2 * 3.54) - (xmin / sf / 2 * 3.54) + (pockets[i][j][j2].X/100) * 3.54 / sf, (pockets[i][j][j2].Y/100) * 3.54 / sf + (svgh / vpos) - (ymax / sf * 3.54) + (ymax / sf / 2 - ymin / sf / 2 * 3.54))
+    }
+  }
+}
+	ctx.stroke()
+
 }
 
 function makeGcode() {

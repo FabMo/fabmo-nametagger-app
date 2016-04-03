@@ -114,8 +114,11 @@
                             <button id="draw" type="button">Preview</button>
                         </div>
                         <div>
+                            <input type="file" id="load"/>
+								</div>
+                        <div>
                             <button id="submit" type="button" onclick="makeGcode()">Submit Job</button>
-                        </div>					
+                        </div>						
                    </div>
 
                   </div>
@@ -219,7 +222,54 @@
         txtpocket(thisString,fontSelected,letterHt,bit)
     
     };
- 
+
+
+function onReadFile(evt) {
+
+    var f = evt.target.files[0]; 
+
+    if (f) {
+
+      var r = new FileReader();
+      r.onload = function(e) { 
+	     var contents = e.target.result;
+
+		  reload();
+
+		  worksheetCanvas = $('#worksheetCanvas');
+		  ctx = worksheetCanvas.get(0).getContext("2d");
+		  ctx.clearRect(0, 0, document.getElementById("worksheetCanvas").width, document.getElementById("worksheetCanvas").height);
+		  var source = new Image();
+		  source.src = $('#cutoutShape').val();
+
+		  // Render our SVG image to the canvas once it loads.
+		  source.onload = function() {
+		    svgw = source.width
+		    svgh = source.height
+		    $('#worksheetCanvas').attr('height', svgh);
+		    $('#worksheetCanvas').attr('width', svgw);
+		    ctx.drawImage(source, 0, 0);
+		    setTimeout('drawText()', 400);
+
+  }
+
+		  tool_diameter=($('#bitSize').val())
+		  sf = parseFloat((152.4 / (($('#letterHeight').val()) * 25.4)).toFixed(2))
+		  txt =  $('#ToEngrave').val();       
+        font = opentype.parse(e.target.result);
+
+        onFontLoaded(font);
+        
+      }
+        r.readAsArrayBuffer(f);
+
+    } else { 
+      alert("Failed to load file");
+    }
+
+}
+
+document.getElementById('load').addEventListener('change', onReadFile, false) 
  
 </script>
   

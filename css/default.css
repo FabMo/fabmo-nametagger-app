@@ -139,6 +139,19 @@ select{
 	-moz-box-sizing: border-box;
  		 box-sizing: border-box;
 }
+#load {
+	width: 50%;
+	max-width: 150px;
+	background-color: #CCC;
+	color: black;
+	margin: 1em;
+    
+	border: 1px solid #A9A9A9;
+	border-radius: 5px;
+	line-height: 2em;
+	-moz-box-sizing: border-box;
+ 		 box-sizing: border-box;
+}
 #submit {
 	width: 50%;
 	max-width: 150px;
