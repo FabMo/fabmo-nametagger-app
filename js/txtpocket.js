@@ -146,6 +146,7 @@ function reload() {
   x = []
   y = []
 
+
 }
 
 function txtpocket(txt_string, font, size, tool) {
@@ -211,9 +212,14 @@ function loadtxt() {
 function onFontLoaded(font) {
 
   // try to load text in canvas
+  
+  //console.log(font)
 
   ctx.font = "32px Chicago";
   //    ctx.fillText(txt, 150, 100);	
+
+	
+
 
   var path = font.getPath(txt, 0, 0, 152.4)
 
@@ -621,11 +627,10 @@ function drawText() {
 
   ctx.stroke()
 
+//pockets
   ctx.beginPath()
   ctx.lineWidth = "1"
   ctx.strokeStyle = 'rgba(200,0,200,1)'
-
-//pockets
 
 for (i = 0; i < pockets.length; i++) {
   for (j = 0; j < pockets[i].length; j++) {

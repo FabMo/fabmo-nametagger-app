@@ -14,12 +14,15 @@
     <script src="js/snap.svg-min.js"></script>
     <script src="js/clipper.js"></script>
     <script src="js/txtpocket.js"></script> 
-    <script src="js/fabmo.js"></script>
+    <script src="js/libs/fabmo.js"></script>
     <script type="text/javascript">
         var fabmo = new FabMoDashboard();
     </script>
+	 <script src="js/control.js"></script>
+	 <script src="js/config.js"></script>
+
   </head>
-  <body onload="$('#draw').click()">
+  <body onload="$('#draw').click(); getList()">
 
         <!-- Title/description -->
      <h1 class="title">Fabmo NameTagger</h1>
@@ -114,12 +117,20 @@
                             <button id="draw" type="button">Preview</button>
                         </div>
                         <div>
-                            <input type="file" id="load"/>
-								</div>
-                        <div>
                             <button id="submit" type="button" onclick="makeGcode()">Submit Job</button>
                         </div>						
                    </div>
+
+                        <div>
+                            <input type="file" id="load"/>
+								</div>
+		                  <div  id="customfonts">
+        					   <label for="font-upload">Custom Fonts:</label>
+                        <select name="font-upload" id="font-upload">
+                        </select>
+								</div>
+                    </div>
+
 
                   </div>
                 </fieldset>
@@ -140,9 +151,12 @@
     </div>
 
     
-
->
 <script>
+
+var myConfig={fonts:[]}
+var cFonts = []
+var fontload
+var cfont
 
         var MaxYVal = (localStorage.getItem('MaxYVal')) || 8; 
         $('#MaxYVal').val(MaxYVal);
@@ -152,8 +166,6 @@
       //$("#bitSize").val(bitIndex);
         var engraveDepth = (localStorage.getItem('engraveDepth')) || 0.02; 
         $('#engraveDepth').val(engraveDepth); 
-       
-
         
         var letterHeight = (localStorage.getItem('letterHeight')) || 0.5;
         $('#letterHeight').val(letterHeight)
@@ -181,7 +193,7 @@
     });   
     
     $('#fontlist').on('change', function(){
-        draw ();
+        draw();
     });
 
 
@@ -206,10 +218,24 @@
     });
 
 
-    function draw (){
+    $('#font-upload').on('click', function(){
+        customFont()
         
-       
-          
+    });
+
+
+    function draw (){
+    
+for(i2=0;i2<cFonts.length;i2++){
+	if((document.getElementById("fontlist").value)==(cFonts[i2].name)){
+		fontload = cFonts[i2].font
+		customFont()
+		cfont = true
+	}
+}
+
+if((cFonts.length==0) || (cfont==false)){        
+
         var thisString = $('#ToEngrave').val();
             if(thisString==''){
                 thisString='BAT'
@@ -220,9 +246,11 @@
         var bit =  $('#bitSize').val();
         //console.log(thisString + ", "+ fontSelected+ ", " + letterHt + ", " + bit)
         txtpocket(thisString,fontSelected,letterHt,bit)
-    
-    };
+}
 
+cfont = false
+
+}
 
 function onReadFile(evt) {
 
@@ -232,10 +260,51 @@ function onReadFile(evt) {
 
       var r = new FileReader();
       r.onload = function(e) { 
-	     var contents = e.target.result;
 
 		  reload();
+		  clear();
 
+		  tool_diameter=($('#bitSize').val())
+		  sf = parseFloat((152.4 / (($('#letterHeight').val()) * 25.4)).toFixed(2))
+		  txt =  $('#ToEngrave').val();
+       
+        fontload = opentype.parse(e.target.result);
+        
+		  var font_name=(fontload.familyName + "-" + fontload.styleName)
+		  font_name = font_name.replace(/ /g,"-")
+
+		  cFonts.push({name:font_name,font:fontload})
+
+        myConfig.fonts=cFonts
+//		  console.log(cFonts)
+		  console.log(myConfig)
+	     fabmo.setAppConfig(myConfig)
+		
+		  font_name= "<option" + " value=\"" + font_name + "\">" + font_name + "</option>"
+
+		  $("#font-upload").append(font_name)
+		  $("#fontlist").append(font_name)
+
+		  font_name=(fontload.familyName + "-" + fontload.styleName)
+		  font_name = font_name.replace(/ /g,"-")
+
+		  document.getElementById("font-upload").value=font_name
+		  document.getElementById("fontlist").value=font_name
+		  onFontLoaded(fontload)
+	
+      }
+
+	r.readAsArrayBuffer(f);	
+
+	}
+	else { 
+		alert("Failed to load font file");
+	}
+	cfont = false
+}
+
+
+function clear (){
 		  worksheetCanvas = $('#worksheetCanvas');
 		  ctx = worksheetCanvas.get(0).getContext("2d");
 		  ctx.clearRect(0, 0, document.getElementById("worksheetCanvas").width, document.getElementById("worksheetCanvas").height);
@@ -253,23 +322,33 @@ function onReadFile(evt) {
 
   }
 
-		  tool_diameter=($('#bitSize').val())
-		  sf = parseFloat((152.4 / (($('#letterHeight').val()) * 25.4)).toFixed(2))
-		  txt =  $('#ToEngrave').val();       
-        font = opentype.parse(e.target.result);
+}
 
-        onFontLoaded(font);
-        
-      }
-        r.readAsArrayBuffer(f);
+function customFont(){
+	reload()
+	clear()
 
-    } else { 
-      alert("Failed to load file");
-    }
+	tool_diameter=($('#bitSize').val())
+	sf = parseFloat((152.4 / (($('#letterHeight').val()) * 25.4)).toFixed(2))
+	txt =  $('#ToEngrave').val()
+
+	onFontLoaded(fontload)
 
 }
 
-document.getElementById('load').addEventListener('change', onReadFile, false) 
+function getList(){
+
+console.log("get font list")
+fabmo.getAppConfig(function(err, cfg) {
+	console.log(cfg)
+});
+
+}
+
+document.getElementById('load').addEventListener('change', onReadFile, false)
+
+
+ 
  
 </script>
   

@@ -139,7 +139,14 @@ select{
 	-moz-box-sizing: border-box;
  		 box-sizing: border-box;
 }
+
+#customfonts{
+	display:none;
+}
+
+
 #load {
+
 	width: 50%;
 	max-width: 150px;
 	background-color: #CCC;
