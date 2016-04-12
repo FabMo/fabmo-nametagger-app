@@ -118,17 +118,17 @@
                         </div>
                         <div>
                             <button id="submit" type="button" onclick="makeGcode()">Submit Job</button>
-                        </div>						
-                   </div>
-
+                        </div>					
                         <div>
+                            <label for="load">Or load your own font:</label>
                             <input type="file" id="load"/>
-								</div>
-		                  <div  id="customfonts">
+                            
+					    </div>
+		                 <div  id="customfonts">
         					   <label for="font-upload">Custom Fonts:</label>
-                        <select name="font-upload" id="font-upload">
-                        </select>
-								</div>
+                               <select name="font-upload" id="font-upload"></select>
+						</div>
+                    </div>
                     </div>
 
 
@@ -291,6 +291,10 @@ function onReadFile(evt) {
 		  document.getElementById("font-upload").value=font_name
 		  document.getElementById("fontlist").value=font_name
 		  onFontLoaded(fontload)
+          
+        if(font_name.length > 0){
+            $('#customfonts').show();
+        }
 	
       }
 
