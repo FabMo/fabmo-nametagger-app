@@ -143,9 +143,6 @@ select{
 }
 
 
-#load {
-
-}
 #submit {
 	width: 50%;
 	max-width: 150px;
@@ -154,6 +151,7 @@ select{
 	border: 1px solid #32B433;;
 	border-radius: 5px;
     margin-top: 1em;
+    margin-bottom: .7em;
 	line-height: 2em;
 	-moz-box-sizing: border-box;
  		 box-sizing: border-box;
